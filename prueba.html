@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardar Datos de Alquiler en LocalStorage</title>
+</head>
+<body>
+    <form id="miFormulario">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre"><br>
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo"><br>
+        <label for="documento">Documento:</label>
+        <input type="text" id="documento" name="documento"><br>
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion"><br>
+        <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"><br>
+        <label for="duracion_alquiler">Duración del Alquiler (en días):</label>
+        <input type="number" id="duracion_alquiler" name="duracion_alquiler"><br>
+        <label for="tipo_bicicleta">Tipo de Bicicleta:</label>
+        <input type="text" id="tipo_bicicleta" name="tipo_bicicleta"><br>
+        <label for="tamaño_bicicleta">Tamaño de Bicicleta:</label>
+        <input type="text" id="tamaño_bicicleta" name="tamaño_bicicleta"><br>
+        <button type="button" onclick="guardarDatos()">Guardar Datos de Alquiler</button>
+    </form>
+
+    <script>
+        function guardarDatos() {
+            var nombre = document.getElementById("nombre").value;
+            var correo = document.getElementById("correo").value;
+            var documento = document.getElementById("documento").value;
+            var direccion = document.getElementById("direccion").value;
+            var fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
+            var duracion_alquiler = document.getElementById("duracion_alquiler").value;
+            var tipo_bicicleta = document.getElementById("tipo_bicicleta").value;
+            var tamaño_bicicleta = document.getElementById("tamaño_bicicleta").value;
+
+            var datos = {
+                nombre: nombre,
+                correo: correo,
+                documento: documento,
+                direccion: direccion,
+                fecha_nacimiento: fecha_nacimiento,
+                duracion_alquiler: duracion_alquiler,
+                tipo_bicicleta: tipo_bicicleta,
+                tamaño_bicicleta: tamaño_bicicleta
+            };
+
+            // Obtener los datos existentes del LocalStorage
+            var jsonData = localStorage.getItem('Alquiler');
+            var listaDatos = [];
+
+            if (jsonData) {
+                listaDatos = JSON.parse(jsonData);
+            }
+
+            // Agregar los nuevos datos a la lista
+            listaDatos.push(datos);
+
+            // Convertir la lista actualizada a JSON y guardarla en LocalStorage
+            localStorage.setItem('Alquiler', JSON.stringify(listaDatos));
+        }
+    </script>
+</body>
+</html>
